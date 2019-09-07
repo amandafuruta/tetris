@@ -15,13 +15,20 @@ Data 28/08/19
 /*Inicializa a matriz principal com espaços vazios*/
 void init (char matrix[ROWS][COLUMNS]){
     int i, j;
-
-    for (i=0; i<ROWS; i++){
+        
         for (j=0; j<COLUMNS; j++){
-            matrix[i][j]= ' ';
+            matrix[0][j]= '*';
+            matrix[19][j]='*';
+        } 
+        for (i=0; i<ROWS; i++){
+            matrix[i][0]= '*';
+            matrix[i][59]='*';
         }
-    }
-
+        for (i=1; i<ROWS-1; i++){
+            for(j=1; j<COLUMNS-1; j++){
+                matrix[i][j]= ' ';
+            }
+        }
 }
 
 
@@ -32,7 +39,7 @@ void printMatrix (char matrix[ROWS][COLUMNS]){
         for (j=0; j<COLUMNS; j++){
             printf ("%c", matrix[i][j]);
         }
-        printf ("\n"); //quebra linha
+       printf ("\n"); //quebra linha
     }
 
 }
