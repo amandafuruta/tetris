@@ -20,24 +20,27 @@ int main(){
     int posI, posJ;
     
 
-    posI= 1; //linha
+    posI= 0; //linha
     posJ= COLUMNS/2;
 
-    //inicializando a atriz
+    //inicializando a matriz
     init (matrix); 
 
     //apagar o cursor da tela
     ShowConsoleCursor(0);
     system ("cls");
 
-
+    //animação do jogo
     while (1) {
         gotoxy(0,0);
         
         matrix[posI][posJ]= '@';
+
+        //mostra a matriz na tela
         printMatrix(matrix);
+
         matrix[posI][posJ]= ' ';
-        if (posI<ROWS-2) posI++;
+        if (posI<ROWS-1) posI++;
         
 
     } 
