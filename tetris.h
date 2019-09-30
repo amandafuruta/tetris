@@ -19,8 +19,10 @@ Data 28/08/19
 #define ARROWS 224 //teclado de setas
 #define LEFT 75
 #define RIGHT 77
-#define TECLA_A 97
-#define TECLA_D 100
+#define TECLA_a 97
+#define TECLA_d 100
+#define TECLA_A 65
+#define TECLA_D 68
 
 //assinaturas
 void init (char matrix[ROWS][COLUMNS]);

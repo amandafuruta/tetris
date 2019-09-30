@@ -56,10 +56,12 @@ int main(){
         } 
         
         switch (keypressed){
+            case TECLA_a: //outra forma de fazer (mas nao indicado)- (int)'a';
             case TECLA_A: //caso apertar o 'a' vai para esquerda tbm
             case LEFT://codigo da seta para esquerda 
                 if( posJ>0) posJ--; 
                     break; 
+            case TECLA_d:
             case TECLA_D: // caso apertar 'd' vai para direita
             case RIGHT: //codigo de seta para direita
                 if (posJ< COLUMNS-1) posJ++;
