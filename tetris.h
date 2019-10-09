@@ -12,7 +12,7 @@ Data 28/08/19
 
 //Config das dimensões da matriz principal do jogo
 #define COLUMNS 60
-#define ROWS 20
+#define ROWS 25
 
 //configuração das teclas
 #define ESC 27
@@ -23,6 +23,32 @@ Data 28/08/19
 #define TECLA_d 100
 #define TECLA_A 65
 #define TECLA_D 68
+//ORIENTAÇÃO DAS PEÇAS
+#define ORIENTACAO_UP 1
+#define ORIENTACAO_DOWN 2
+#define ORIENTACAO_LEFT 3
+#define ORIENTACAO_RIGHT 4
+//TIPOS DE PEÇAS
+#define TIPO_L 1
+#define TIPO_L_R 2 //L REVERSO
+#define TIPO_T 3
+#define TIPO_Z 4
+#define TIPO_Z_R 5
+#define TIPO_O 6
+#define TIPO_I 7
+
+//config de layout
+#define PIXEL 219
+#define EMPTY 32
+
+//Estrutura padrão de componentes
+typedef struct{
+    int i, j;
+    int orientacao;
+    int tipo;
+    int width;
+    int height;
+}Bloco;
 
 //assinaturas
 void init (char matrix[ROWS][COLUMNS]);
