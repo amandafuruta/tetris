@@ -47,7 +47,9 @@ int main(){
             printf("@ = (%d, %d)\n", tijolo.i, tijolo.j);
         #endif
 
-        switch (tijolo.orientacao){
+
+        
+        /*switch (tijolo.orientacao){
             case ORIENTACAO_UP:
                 if(tijolo.i-3>=0) matrix[tijolo.i-3][tijolo.j]= PIXEL;
                 if(tijolo.i-2>=0) matrix[tijolo.i-2][tijolo.j]= PIXEL;
@@ -60,13 +62,22 @@ int main(){
                 matrix[tijolo.i][tijolo.j]= PIXEL;
                 matrix[tijolo.i][tijolo.j-1]= PIXEL;
                 break;
-        }
+        }*/
         
 
         //mostra a matriz na tela
+
+        
+        drawBar (matrix, tijolo, PIXEL);
+                
+        
         printMatrix(matrix);
 
-        switch (tijolo.orientacao){
+       
+        drawBar (matrix, tijolo, EMPTY);
+               
+
+        /*switch (tijolo.orientacao){
             case ORIENTACAO_UP:
                 if(tijolo.i-3>=0) matrix[tijolo.i-3][tijolo.j]= EMPTY;
                 if(tijolo.i-2>=0) matrix[tijolo.i-2][tijolo.j]= EMPTY;
@@ -79,12 +90,13 @@ int main(){
                 matrix[tijolo.i][tijolo.j]= EMPTY;
                 matrix[tijolo.i][tijolo.j-1]= EMPTY;
                 break;
-        }
+        }*/
 
 
 
         if (tijolo.i<ROWS-1)tijolo.i++;
 
+        
 
 
         //lendo teclas- kbhit -> da biblio conio.h
@@ -101,13 +113,18 @@ int main(){
             case TECLA_a: //outra forma de fazer (mas nao indicado)- (int)'a';
             case TECLA_A: //caso apertar o 'a' vai para esquerda tbm
             case LEFT://codigo da seta para esquerda 
-                if( tijolo.j>0) tijolo.j--; 
+                if( tijolo.j-2>0) tijolo.j--; 
                     break; 
             case TECLA_d:
             case TECLA_D: // caso apertar 'd' vai para direita
             case RIGHT: //codigo de seta para direita
-                if (tijolo.j< COLUMNS-1) tijolo.j++;
+                if (tijolo.j+2< COLUMNS-1) tijolo.j++;
                     break; 
+            case TECLA_ESPACO:
+                if(tijolo.orientacao==ORIENTACAO_LEFT)
+                    tijolo.orientacao= ORIENTACAO_UP;
+                else 
+                    tijolo.orientacao++;
         }
 
     } 

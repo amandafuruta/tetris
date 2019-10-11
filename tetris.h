@@ -23,11 +23,12 @@ Data 28/08/19
 #define TECLA_d 100
 #define TECLA_A 65
 #define TECLA_D 68
+#define TECLA_ESPACO 32
 //ORIENTAÇÃO DAS PEÇAS
 #define ORIENTACAO_UP 1
-#define ORIENTACAO_DOWN 2
-#define ORIENTACAO_LEFT 3
-#define ORIENTACAO_RIGHT 4
+#define ORIENTACAO_RIGHT 2
+#define ORIENTACAO_DOWN 3
+#define ORIENTACAO_LEFT 4
 //TIPOS DE PEÇAS
 #define TIPO_L 1
 #define TIPO_L_R 2 //L REVERSO
@@ -56,3 +57,6 @@ void init (char matrix[ROWS][COLUMNS]);
 
 void printMatrix (char matrix[ROWS][COLUMNS]);
 /* Mostra o conteúdo da matriz principal na tela do pc*/
+
+//desenha bara usando simbolo ASCII passado por parametro
+void drawBar (char matrix[ROWS][COLUMNS],Bloco barra, int simbolo);
