@@ -11,8 +11,8 @@ Data 28/08/19
 #include <conio.h>
 
 //Config das dimensões da matriz principal do jogo
-#define COLUMNS 60
-#define ROWS 25
+#define COLUMNS 30
+#define ROWS 60
 
 //configuração das teclas
 #define ESC 27

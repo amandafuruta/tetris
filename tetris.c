@@ -27,7 +27,7 @@ void init (char matrix[ROWS][COLUMNS]){
 /* Mostra o conteúdo da matriz principal na tela do pc*/
 void printMatrix (char matrix[ROWS][COLUMNS]){
     int i , j;
-    printf("\t\t\t");
+    printf("\t\t\t\t\t");
     //Linha de cima
     for(j=0; j<COLUMNS+2; j++){
         printf("*");
@@ -36,14 +36,14 @@ void printMatrix (char matrix[ROWS][COLUMNS]){
 
     //Matriz do jogo
     for(i=0; i<ROWS; i++){        
-        printf("\t\t\t*");
+        printf("\t\t\t\t\t*");
         for(j=0; j<COLUMNS; j++){
             printf("%c", matrix[i][j]);
         }
         printf("*\n");
     }
 
-    printf("\t\t\t");
+    printf("\t\t\t\t\t");
     //Linha de baixo
     for(j=0; j<COLUMNS+2; j++){
         printf("*");

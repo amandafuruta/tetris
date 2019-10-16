@@ -24,8 +24,8 @@ int main(){
     tijolo.i =0;
     tijolo.j= COLUMNS/2;
     tijolo.orientacao = ORIENTACAO_LEFT;
-    tijolo.width= 1;
-    tijolo.height=8;
+    tijolo.width= 5;
+    tijolo.height=1;
     
 
     //posI= 0; //linha
@@ -45,6 +45,7 @@ int main(){
         //se valor 1- mostra na tela. se valor 0, não mostra
         #if DEBUG == 1
             printf("@ = (%d, %d)\n", tijolo.i, tijolo.j);
+            printf("Dimensão= (%d, %d)\n", tijolo.height, tijolo.width);
         #endif
 
 
@@ -113,18 +114,27 @@ int main(){
             case TECLA_a: //outra forma de fazer (mas nao indicado)- (int)'a';
             case TECLA_A: //caso apertar o 'a' vai para esquerda tbm
             case LEFT://codigo da seta para esquerda 
-                if( tijolo.j-2>0) tijolo.j--; 
+                if( tijolo.j- (tijolo.width/2)>0) tijolo.j--; 
                     break; 
             case TECLA_d:
             case TECLA_D: // caso apertar 'd' vai para direita
             case RIGHT: //codigo de seta para direita
-                if (tijolo.j+2< COLUMNS-1) tijolo.j++;
+                if (tijolo.j+ (tijolo.width/2)< COLUMNS-1) tijolo.j++;
                     break; 
             case TECLA_ESPACO:
                 if(tijolo.orientacao==ORIENTACAO_LEFT)
                     tijolo.orientacao= ORIENTACAO_UP;
                 else 
                     tijolo.orientacao++;
+                //inversão da dimensao do tijolo
+                int aux= tijolo.width;
+                tijolo.width= tijolo.height;
+                tijolo.height= aux;
+                //resolvendo bug dos cantos
+                if (tijolo.j < (tijolo.width/2))
+                    tijolo.j= tijolo.width/2;
+                else if (tijolo.j > COLUMNS - (tijolo.width/2))
+                    tijolo.j= COLUMNS - (tijolo.width/2)-1;
         }
 
     } 
