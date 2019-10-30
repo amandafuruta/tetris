@@ -11,7 +11,8 @@ Data 28/08/19
 
 #include "tetris.h"
 #include "display.h"
-#define DEBUG 1
+
+
 
  /*Parte principal do progrma, responsavel por iniciar e
  chamar as funções auxiliares*/
@@ -20,13 +21,19 @@ int main(){
     char matrix[ROWS][COLUMNS];
     Bloco tijolo;
     int keypressed=0;
+
+    //apagar o cursor da tela
+    ShowConsoleCursor(0);
+    system ("cls");
+
+
     //int posI, posJ;- substituido pela struct
-    tijolo.i =0;
+    /*tijolo.i =0;
     tijolo.j= COLUMNS/2;
     tijolo.orientacao = ORIENTACAO_LEFT;
     tijolo.width= 5;
-    tijolo.height=1;
-    
+    tijolo.height=1;*/
+    initBar(&tijolo);
 
     //posI= 0; //linha
     //posJ= COLUMNS/2;
@@ -34,10 +41,7 @@ int main(){
     //inicializando a matriz
     init (matrix); 
 
-    //apagar o cursor da tela
-    ShowConsoleCursor(0);
-    system ("cls");
-
+    
     //animação do jogo
     while ( keypressed != ESC) { //27 é o cod do esc- para sair do jogo
         gotoxy(0,0);
@@ -45,7 +49,7 @@ int main(){
         //se valor 1- mostra na tela. se valor 0, não mostra
         #if DEBUG == 1
             printf("@ = (%d, %d)\n", tijolo.i, tijolo.j);
-            printf("Dimensão= (%d, %d)\n", tijolo.height, tijolo.width);
+            printf("Dimensao= (%d, %d)\n", tijolo.height, tijolo.width);
         #endif
 
 
@@ -74,8 +78,17 @@ int main(){
         
         printMatrix(matrix);
 
+       //if((tijolo.i + tijolo.height/2) <(ROWS-1)) //para a peça nao apagar mais
        
-        drawBar (matrix, tijolo, EMPTY);
+       if(! collisionDetect(matrix,tijolo) ){ //faça posicao anterior do @ ser apagada
+           drawBar (matrix, tijolo, EMPTY);
+            
+           if (tijolo.i<ROWS-1)tijolo.i++;
+
+       }else{
+            initBar(&tijolo);
+        }
+            
                
 
         /*switch (tijolo.orientacao){
@@ -95,8 +108,7 @@ int main(){
 
 
 
-        if (tijolo.i<ROWS-1)tijolo.i++;
-
+       
         
 
 
@@ -122,19 +134,8 @@ int main(){
                 if (tijolo.j+ (tijolo.width/2)< COLUMNS-1) tijolo.j++;
                     break; 
             case TECLA_ESPACO:
-                if(tijolo.orientacao==ORIENTACAO_LEFT)
-                    tijolo.orientacao= ORIENTACAO_UP;
-                else 
-                    tijolo.orientacao++;
-                //inversão da dimensao do tijolo
-                int aux= tijolo.width;
-                tijolo.width= tijolo.height;
-                tijolo.height= aux;
-                //resolvendo bug dos cantos
-                if (tijolo.j < (tijolo.width/2))
-                    tijolo.j= tijolo.width/2;
-                else if (tijolo.j > COLUMNS - (tijolo.width/2))
-                    tijolo.j= COLUMNS - (tijolo.width/2)-1;
+               rotate(&tijolo);
+               break;
         }
 
     } 
