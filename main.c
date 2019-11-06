@@ -126,12 +126,16 @@ int main(){
             case TECLA_a: //outra forma de fazer (mas nao indicado)- (int)'a';
             case TECLA_A: //caso apertar o 'a' vai para esquerda tbm
             case LEFT://codigo da seta para esquerda 
-                if( tijolo.j- (tijolo.width/2)>0) tijolo.j--; 
+                if( tijolo.j- (tijolo.width/2)>0)
+                    if(matrix[tijolo.i][tijolo.j - (tijolo.width/2)-1] == EMPTY)
+                        tijolo.j--; 
                     break; 
             case TECLA_d:
             case TECLA_D: // caso apertar 'd' vai para direita
             case RIGHT: //codigo de seta para direita
-                if (tijolo.j+ (tijolo.width/2)< COLUMNS-1) tijolo.j++;
+                if (tijolo.j+ (tijolo.width/2)< COLUMNS-1)
+                    if(matrix[tijolo.i][tijolo.j + (tijolo.width/2)+1] == EMPTY)
+                        tijolo.j++;
                     break; 
             case TECLA_ESPACO:
                rotate(&tijolo);
