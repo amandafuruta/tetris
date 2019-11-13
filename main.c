@@ -80,7 +80,7 @@ int main(){
 
        //if((tijolo.i + tijolo.height/2) <(ROWS-1)) //para a peça nao apagar mais
        
-       if(! collisionDetect(matrix,tijolo) ){ //faça posicao anterior do @ ser apagada
+       if(! collisionBar(matrix,tijolo, UNCHECK_SIDE, NONE) ){ //faça posicao anterior do @ ser apagada
            drawBar (matrix, tijolo, EMPTY);
             
            if (tijolo.i<ROWS-1)tijolo.i++;
@@ -105,12 +105,7 @@ int main(){
                 matrix[tijolo.i][tijolo.j-1]= EMPTY;
                 break;
         }*/
-
-
-
-       
         
-
 
         //lendo teclas- kbhit -> da biblio conio.h
         keypressed=0; //para o bichinho não ficar indo para o lado infinitamente
@@ -126,15 +121,13 @@ int main(){
             case TECLA_a: //outra forma de fazer (mas nao indicado)- (int)'a';
             case TECLA_A: //caso apertar o 'a' vai para esquerda tbm
             case LEFT://codigo da seta para esquerda 
-                if( tijolo.j- (tijolo.width/2)>0)
-                    if(matrix[tijolo.i][tijolo.j - (tijolo.width/2)-1] == EMPTY)
+                if(!collisionBar(matrix, tijolo, CHECK_SIDE, LEFT))
                         tijolo.j--; 
                     break; 
             case TECLA_d:
             case TECLA_D: // caso apertar 'd' vai para direita
             case RIGHT: //codigo de seta para direita
-                if (tijolo.j+ (tijolo.width/2)< COLUMNS-1)
-                    if(matrix[tijolo.i][tijolo.j + (tijolo.width/2)+1] == EMPTY)
+                if(!collisionBar(matrix, tijolo, CHECK_SIDE, RIGHT))
                         tijolo.j++;
                     break; 
             case TECLA_ESPACO:

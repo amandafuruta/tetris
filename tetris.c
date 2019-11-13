@@ -56,6 +56,7 @@ void drawBar (char matrix[ROWS][COLUMNS], Bloco barra, int simbolo){ //o simbolo
     switch (barra.orientacao){
             case ORIENTACAO_DOWN:
             case ORIENTACAO_UP:
+                if(barra.i-3>=0) matrix[barra.i-4][barra.j]= simbolo;
                 if(barra.i-3>=0) matrix[barra.i-3][barra.j]= simbolo;
                 if(barra.i-2>=0) matrix[barra.i-2][barra.j]= simbolo;
                 if(barra.i-1>=0) matrix[barra.i-1][barra.j]= simbolo;
@@ -102,20 +103,46 @@ void rotate (Bloco *bloco){
             bloco->j= COLUMNS - (bloco->width/2)-1;
 }
 
-int collisionDetect(char matrix[ROWS][COLUMNS],Bloco barra){
+int collisionBar(char matrix[ROWS][COLUMNS],Bloco barra, int collideSide, int side){
     int retorno=0;
+     
+     //colisão com base
         if((barra.i +1) >=ROWS)
         retorno=1;
-        //colisao entre peças
-        
+
+    //colisao da base da barra com outras peças 
         if(matrix [barra.i+1 ][barra.j] != EMPTY)
         retorno = 1;
-
+     
+     //colisão com base horizontal
         int t2= barra.width/2;
         if(matrix[barra.i+1][barra.j+t2] != EMPTY)
         retorno =1;
         if(matrix[barra.i+1][barra.j- t2] != EMPTY)
         retorno=1;
 
+    //colisão lateral horizontal
+    if(collideSide==CHECK_SIDE && (barra.orientacao==ORIENTACAO_LEFT || barra.orientacao==ORIENTACAO_RIGHT) ){
+        if(side==RIGHT && matrix[barra.i][barra.j+ t2+1] != EMPTY)
+            retorno= 1;
+        if(side==RIGHT && barra.j+ t2+1 >= COLUMNS)
+            retorno =1;
+        if(side==LEFT && matrix[barra.i][barra.j- t2-1] != EMPTY)
+            retorno= 1;
+        if(side==LEFT && barra.j- t2-1 <0)
+            retorno =1;
+    }
+
+    //colisão lateral vertical
+    if(collideSide ==CHECK_SIDE && (barra.orientacao==ORIENTACAO_UP || barra.orientacao==ORIENTACAO_DOWN)){
+        int i;
+        for(i=0; i<barra.height; i++){
+            //verificando colisão lateral com restos de outras peças
+            if(side==RIGHT && matrix[barra.i-i][barra.j+1] != EMPTY)
+            retorno=1;
+            if(side==LEFT && matrix[barra.i-i][barra.j-1]!= EMPTY)
+            retorno=1;
+        }
+    }
     return retorno;
 }
